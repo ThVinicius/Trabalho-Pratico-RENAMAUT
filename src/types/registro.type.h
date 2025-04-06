@@ -1,14 +1,30 @@
 #ifndef TYPES_H
 #define TYPES_H
-typedef struct {
-    char *renamaut;
-    char *fab;
-    char *mod;
-    char *cat;
-    char *apl;
+
+typedef enum
+{
+    INATIVO = 0,
+    ATIVO = 1
+} RegistroStatusEnum;
+
+typedef struct
+{
+    char renamaut[17];
+    char fab[5];
+    char mod[51];
+    char cat[4];
+    char apl[4];
     int ano;
-    char *resp;
-    char *cidade;
-    char *uf;
+    char resp[15];
+    char cidade[51];
+    char uf[3];
+    RegistroStatusEnum status;
 } Registro;
+
+
+typedef struct Registros {
+    Registro registro;
+    struct Registros *next;
+} Registros;
+
 #endif

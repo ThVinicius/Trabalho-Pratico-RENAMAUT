@@ -3,18 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-static char *my_strdup(const char *str)
-{
-  char *dup;
-
-  if (!str)
-    return NULL;
-  dup = malloc(strlen(str) + 1);
-  if (dup)
-    strcpy(dup, str);
-  return dup;
-}
-
 Registro *parse_json_file(char *filename, int *count)
 {
   JSON_Value *root_value;
@@ -83,19 +71,35 @@ Registro *parse_json_file(char *filename, int *count)
       continue;
     }
 
-    /*Função auxiliar para duplicar strings (evita usar diretamente os ponteiros do JSON)*/
-    registros[i].renamaut = my_strdup(json_object_get_string(item, "renamaut"));
-    registros[i].fab = my_strdup(json_object_get_string(item, "fab"));
-    registros[i].mod = my_strdup(json_object_get_string(item, "mod"));
-    registros[i].cat = my_strdup(json_object_get_string(item, "cat"));
-    registros[i].apl = my_strdup(json_object_get_string(item, "apl"));
-    registros[i].ano = (int)json_object_get_number(item, "ano");
-    registros[i].resp = my_strdup(json_object_get_string(item, "resp"));
+    strncpy(registros[i].renamaut, json_object_get_string(item, "renamaut"), sizeof(registros[i].renamaut) - 1);
+    registros[i].renamaut[sizeof(registros[i].renamaut) - 1] = '\0';
 
-    /*Acessar o subobjeto "loc_base"*/
+    strncpy(registros[i].fab, json_object_get_string(item, "fab"), sizeof(registros[i].fab) - 1);
+    registros[i].fab[sizeof(registros[i].fab) - 1] = '\0';
+
+    strncpy(registros[i].mod, json_object_get_string(item, "mod"), sizeof(registros[i].mod) - 1);
+    registros[i].mod[sizeof(registros[i].mod) - 1] = '\0';
+
+    strncpy(registros[i].cat, json_object_get_string(item, "cat"), sizeof(registros[i].cat) - 1);
+    registros[i].cat[sizeof(registros[i].cat) - 1] = '\0';
+
+    strncpy(registros[i].apl, json_object_get_string(item, "apl"), sizeof(registros[i].apl) - 1);
+    registros[i].apl[sizeof(registros[i].apl) - 1] = '\0';
+
+    registros[i].ano = (int)json_object_get_number(item, "ano");
+
+    strncpy(registros[i].resp, json_object_get_string(item, "resp"), sizeof(registros[i].resp) - 1);
+    registros[i].resp[sizeof(registros[i].resp) - 1] = '\0';
+
     loc_base = json_object_get_object(item, "loc_base");
-    registros[i].cidade = my_strdup(json_object_get_string(loc_base, "cidade"));
-    registros[i].uf = my_strdup(json_object_get_string(loc_base, "uf"));
+
+    strncpy(registros[i].cidade, json_object_get_string(loc_base, "cidade"), sizeof(registros[i].cidade) - 1);
+    registros[i].cidade[sizeof(registros[i].cidade) - 1] = '\0';
+
+    strncpy(registros[i].uf, json_object_get_string(loc_base, "uf"), sizeof(registros[i].uf) - 1);
+    registros[i].uf[sizeof(registros[i].uf) - 1] = '\0';
+
+    registros[i].status = ATIVO;
   }
 
   /*Liberar o JSON*/
@@ -105,21 +109,8 @@ Registro *parse_json_file(char *filename, int *count)
 
 void free_registro(Registro *registros, int count)
 {
-  int i;
-
   if (registros == NULL)
     return;
 
-  for (i = 0; i < count; i++)
-  {
-    free(registros[i].renamaut);
-    free(registros[i].fab);
-    free(registros[i].mod);
-    free(registros[i].cat);
-    free(registros[i].apl);
-    free(registros[i].resp);
-    free(registros[i].cidade);
-    free(registros[i].uf);
-  }
   free(registros);
 }

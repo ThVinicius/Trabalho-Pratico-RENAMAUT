@@ -1,9 +1,9 @@
 #ifndef PRINTER_H
 #define PRINTER_H
 
-#include "json_reader.h"
+#include "../types/registro.type.h"
 
 /*Função para imprimir os registros*/
-void print_registros(Registro *registros, int count);
+void print_registros(Registros *registros);
 
 #endif
