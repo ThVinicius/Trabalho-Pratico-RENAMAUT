@@ -16,7 +16,7 @@ Registro *parse_json_file(char *filename, int *count)
   root_value = json_parse_file(filename);
   if (root_value == NULL)
   {
-    fprintf(stderr, "Erro ao abrir ou parsear o arquivo JSON\n");
+    fprintf(stderr, "Erro ao abrir ou parsear o arquivo %s\n", filename);
     *count = 0;
     return NULL;
   }

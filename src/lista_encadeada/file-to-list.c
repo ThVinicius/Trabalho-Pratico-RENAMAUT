@@ -5,16 +5,16 @@
 
 void file_to_list(Registros **lista, int argc, char *argv[])
 {
-  int i;
+  int i, j;
 
   for (i = 1; i < argc; i++)
   {
     int count = 0;
     Registro *registros = parse_json_file(argv[i], &count);
 
-    for (i = 0; i < count; i++)
+    for (j = 0; j < count; j++)
     {
-      add_registro(lista, &registros[i]);
+      add_registro(lista, &registros[j]);
     }
     free_registro(registros, count);
   }
