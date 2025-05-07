@@ -20,6 +20,7 @@ void print_registros(Registros *registros)
     printf("  apl: %s\n", atual->registro.apl);
     printf("  ano: %d\n", atual->registro.ano);
     printf("  resp: %s\n", atual->registro.resp);
+    printf("  status: %d\n", atual->registro.status);
     printf("  loc_base:\n");
     printf("    cidade: %s\n", atual->registro.cidade);
     printf("    uf: %s\n", atual->registro.uf);
