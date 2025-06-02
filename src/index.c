@@ -3,15 +3,17 @@
 #include "lista_encadeada/resetar.h"
 #include "lista_encadeada/file-to-list.h"
 #include "shared/responsibility_report.h"
+#include "shared/category_report.h"
 
 int main(int argc, char *argv[])
 {
-  const char *name;
   Registros *lista = NULL;
 
   file_to_list(&lista, argc, argv);
 
   gerar_relatorio_responsabilidade(lista, "98761388718");
+
+  gerar_relatorio_categoria(lista, "460");
 
   return 0;
 }
