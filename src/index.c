@@ -4,10 +4,11 @@
 #include "lista_encadeada/file-to-list.h"
 #include "lista_encadeada/salvar-dados.h"
 #include "lista_encadeada/carregar-dados.h"
+#include "shared/responsibility_report.h"
+#include "shared/category_report.h"
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-  const char *name;
   Registros *lista = NULL;
 	
   file_to_list(&lista, argc, argv);
@@ -15,8 +16,8 @@ int main(int argc, char* argv[])
   print_registros(lista);
   salvar_dados(lista);
 
-  name = get_state_name_by_abbr("AC");
-  printf("Estado: %s\n", name);
+  gerar_relatorio_responsabilidade(lista, "98761388718");
+  gerar_relatorio_categoria(lista, "460");
 
   return 0;
 }
