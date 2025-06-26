@@ -16,8 +16,6 @@ void *parse_json_and_insert(char *filename, void *estrutura_dados, InserirCallba
   int i;
   int count = 0;
 
-  printf("Tentando abrir arquivo: %s\n", filename);
-
   /* Carregar o arquivo JSON */
   root_value = json_parse_file(filename);
   if (root_value == NULL)
@@ -25,8 +23,6 @@ void *parse_json_and_insert(char *filename, void *estrutura_dados, InserirCallba
     fprintf(stderr, "Erro ao abrir ou parsear o arquivo %s\n", filename);
     return NULL;
   }
-
-  printf("Arquivo JSON carregado com sucesso\n");
 
   /* Obter o objeto raiz */
   root_object = json_value_get_object(root_value);
@@ -48,7 +44,6 @@ void *parse_json_and_insert(char *filename, void *estrutura_dados, InserirCallba
 
   /* Obter o número de itens no array */
   count = json_array_get_count(dados_array);
-  printf("Encontrados %d registros no arquivo\n", count);
 
   if (count == 0)
   {
@@ -66,8 +61,6 @@ void *parse_json_and_insert(char *filename, void *estrutura_dados, InserirCallba
       fprintf(stderr, "Erro: item %d não é um objeto\n", i);
       continue;
     }
-
-    printf("Processando registro %d\n", i + 1);
 
     /* Popular a struct temporária */
     renamaut_str = json_object_get_string(item, "renamaut");
@@ -140,19 +133,10 @@ void *parse_json_and_insert(char *filename, void *estrutura_dados, InserirCallba
 
     temp_registro.status = ATIVO;
 
-    printf("Inserindo registro: %s\n", temp_registro.renamaut);
     estrutura_dados = callback_inserir(estrutura_dados, temp_registro);
   }
 
   /* Liberar o JSON */
   json_value_free(root_value);
   return estrutura_dados;
-}
-
-void free_registro(Registro *registros, int count)
-{
-  if (registros == NULL)
-    return;
-
-  free(registros);
 }

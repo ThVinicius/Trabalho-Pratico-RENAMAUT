@@ -6,7 +6,6 @@ NoABB *inserir(NoABB **raiz, Registro maquina)
 
   if (*raiz == NULL)
   {
-    printf("DEBUG: Criando novo no para %s\n", maquina.renamaut);
     *raiz = criarNo(maquina);
     return *raiz;
   }

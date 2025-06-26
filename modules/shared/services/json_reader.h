@@ -8,6 +8,5 @@ typedef void *(*InserirCallback)(void *estrutura_dados, Registro maquina);
 
 /*Funções para ler o JSON e liberar memória*/
 void *parse_json_and_insert(char *filename, void *estrutura_dados, InserirCallback callback_inserir);
-void free_registro(Registro *registros, int count);
 
 #endif
