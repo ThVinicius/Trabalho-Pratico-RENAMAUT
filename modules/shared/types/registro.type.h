@@ -21,10 +21,16 @@ typedef struct
     RegistroStatusEnum status;
 } Registro;
 
-
-typedef struct Registros {
+typedef struct ListaRegistro
+{
     Registro registro;
-    struct Registros *next;
-} Registros;
+    struct ListaRegistro *next;
+} ListaRegistro;
+
+typedef struct
+{
+    ListaRegistro *head;
+    ListaRegistro *tail;
+} GerenciadorListaRegistro;
 
 #endif

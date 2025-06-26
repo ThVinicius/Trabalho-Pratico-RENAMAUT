@@ -4,6 +4,7 @@
 #include "services/imprimir.service.h"
 #include "services/resetar-arvore.service.h"
 #include "types/no.type.h"
+#include "interfaces/exibir-interface.h"
 
 void *inserir_wrapper(void *arvore, Registro registro)
 {
@@ -23,10 +24,7 @@ int main(int argc, char *argv[])
   tempo_para_insercao = (double)(fim - inicio) / CLOCKS_PER_SEC;
   printf("Tempo de CPU gasto na inserçao dos dados dos arquivos: %.6f segundos\n", tempo_para_insercao);
 
-  imprimirInOrdem(arvore);
+  exibir_interface(arvore);
 
-  limparArvore(&arvore);
-
-  imprimirInOrdem(arvore);
   return 0;
 }
