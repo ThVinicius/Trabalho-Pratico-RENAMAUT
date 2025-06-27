@@ -1,4 +1,4 @@
-#include "estado-lista.service.h"
+#include "gerenciador-lista-estado.service.h"
 #include "../adicionar-registro-na-lista.service.h"
 #include "../liberar-gerenciador-lista.service.h"
 #include "../imprimir-lista-registro.service.h"
@@ -26,11 +26,13 @@ NoEstadoRelatorioCategoria *criarNoEstadoRelatorioCategoria(const char *uf)
   {
     return NULL;
   }
+
   strncpy(novoNo->uf, uf, sizeof(novoNo->uf) - 1);
   novoNo->uf[sizeof(novoNo->uf) - 1] = '\0';
 
-  novoNo->maquinas_no_estado->head = NULL;
-  novoNo->maquinas_no_estado->tail = NULL;
+  novoNo->maquinas_no_estado.head = NULL;
+  novoNo->maquinas_no_estado.tail = NULL;
+
   novoNo->prox = NULL;
   return novoNo;
 }
@@ -94,32 +96,11 @@ void liberarGerenciadorListaEstados(GerenciadorListaEstados *gerenciador_ref)
   {
     proximo_estado = atual_estado->prox;
 
-    liberar_lista_registro(&(atual_estado->maquinas_no_estado));
+    liberar_lista_registro(&(atual_estado->maquinas_no_estado)); 
+
     free(atual_estado);
     atual_estado = proximo_estado;
   }
   gerenciador_ref->head = NULL;
   gerenciador_ref->tail = NULL;
-}
-
-void imprimirRelatorioCategoria(GerenciadorListaEstados *gerenciador_estados, const char *categoria_cod)
-{
-  NoEstadoRelatorioCategoria *atual_estado = gerenciador_estados->head;
-
-  printf("\n--- Relatório de Máquinas Ativas por Categoria: %s ---\n", categoria_cod);
-
-  if (atual_estado == NULL)
-  {
-    printf("Nenhuma máquina ativa encontrada para esta categoria.\n");
-  }
-  else
-  {
-    while (atual_estado != NULL)
-    {
-      printf("\n*** Estado: %s ***\n", atual_estado->uf);
-      imprimir_lista_registro(atual_estado->maquinas_no_estado);
-      atual_estado = atual_estado->prox;
-    }
-  }
-  printf("--- Fim do Relatório de Categoria ---\n");
 }

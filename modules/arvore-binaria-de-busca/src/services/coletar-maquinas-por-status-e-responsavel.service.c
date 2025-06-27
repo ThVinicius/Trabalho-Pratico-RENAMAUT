@@ -13,11 +13,11 @@ void coletar_maquinas_por_responsavel_e_status(NoABB *raiz, const char *cpf_cnpj
   {
     if (raiz->dados.status == ATIVO)
     {
-      adicionar_registro_na_lista(&ativas_gerenciador, raiz->dados);
+      adicionar_registro_na_lista(ativas_gerenciador, raiz->dados);
     }
     else
     {
-      adicionar_registro_na_lista(&inativas_gerenciador, raiz->dados);
+      adicionar_registro_na_lista(inativas_gerenciador, raiz->dados);
     }
   }
 

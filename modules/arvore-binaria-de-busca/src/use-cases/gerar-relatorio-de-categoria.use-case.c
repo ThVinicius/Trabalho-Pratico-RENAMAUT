@@ -1,5 +1,6 @@
 #include "gerar-relatorio-de-categoria.use-case.h"
-#include "../../../shared/services/relatorio-por-categoria/estado-lista.service.h"
+#include "../../../shared/services/relatorio-por-categoria/gerenciador-lista-estado.service.h"
+#include "../../../shared/services/relatorio-por-categoria/imprimir-relatorio-categoria.service.h"
 #include "../../../shared/services/adicionar-registro-na-lista.service.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,6 +10,7 @@ void coletar_maquinas_por_categoria_e_estado(NoABB *raiz, const char *categoria_
 {
   if (raiz == NULL)
   {
+
     return;
   }
 

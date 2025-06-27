@@ -59,8 +59,9 @@ void exibir_interface(NoABB *raiz)
     else if (menu == CATEGORY_REPORT_OPTION)
     {
       int c;
-      printf("Digite o código de 3 letras da categoria: ");
-      scanf("%3s", input_buffer);
+      show_categories_by_acronym();
+      printf("\nDigite o código de 6 letras de uma das categorias acima: ");
+      scanf("%6s", input_buffer);
       while ((c = getchar()) != '\n' && c != EOF)
         ;
 

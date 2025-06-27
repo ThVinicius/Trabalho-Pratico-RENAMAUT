@@ -12,7 +12,7 @@ typedef struct
     char renamaut[17];
     char fab[5];
     char mod[51];
-    char cat[4];
+    char cat[7];
     char apl[4];
     int ano;
     char resp[15];
@@ -36,7 +36,7 @@ typedef struct
 typedef struct NoEstadoRelatorioCategoria
 {
     char uf[3];
-    GerenciadorListaRegistro *maquinas_no_estado;
+    GerenciadorListaRegistro maquinas_no_estado;
     struct NoEstadoRelatorioCategoria *prox;
 } NoEstadoRelatorioCategoria;
 

@@ -13,7 +13,7 @@ ListaRegistro *criar_no_lista_registro(Registro registro)
   return novoNo;
 }
 
-void adicionar_registro_na_lista(GerenciadorListaRegistro **gerenciador_ref, Registro registro)
+void adicionar_registro_na_lista(GerenciadorListaRegistro *gerenciador_ref, Registro registro)
 {
   ListaRegistro *novoNo = criar_no_lista_registro(registro);
   if (novoNo == NULL)
@@ -21,14 +21,14 @@ void adicionar_registro_na_lista(GerenciadorListaRegistro **gerenciador_ref, Reg
     return;
   }
 
-  if ((*gerenciador_ref)->head == NULL)
+  if (gerenciador_ref->head == NULL)
   {
-    (*gerenciador_ref)->head = novoNo;
-    (*gerenciador_ref)->tail = novoNo;
+    gerenciador_ref->head = novoNo;
+    gerenciador_ref->tail = novoNo;
   }
   else
   {
-    (*gerenciador_ref)->tail->next = novoNo;
-    (*gerenciador_ref)->tail = novoNo;
+    gerenciador_ref->tail->next = novoNo;
+    gerenciador_ref->tail = novoNo;
   }
 }

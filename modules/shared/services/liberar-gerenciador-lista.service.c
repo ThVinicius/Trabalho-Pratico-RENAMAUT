@@ -1,8 +1,8 @@
 #include "liberar-gerenciador-lista.service.h"
 
-void liberar_lista_registro(GerenciadorListaRegistro **gerenciador_ref)
+void liberar_lista_registro(GerenciadorListaRegistro *gerenciador_ref)
 {
-  ListaRegistro *atual = (*gerenciador_ref)->head;
+  ListaRegistro *atual = gerenciador_ref->head;
   ListaRegistro *proximo;
 
   while (atual != NULL)
@@ -12,6 +12,6 @@ void liberar_lista_registro(GerenciadorListaRegistro **gerenciador_ref)
     atual = proximo;
   }
 
-  (*gerenciador_ref)->head = NULL;
-  (*gerenciador_ref)->tail = NULL;
+  gerenciador_ref->head = NULL;
+  gerenciador_ref->tail = NULL;
 }

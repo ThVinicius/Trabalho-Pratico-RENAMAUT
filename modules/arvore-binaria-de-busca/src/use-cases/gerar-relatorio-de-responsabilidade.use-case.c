@@ -9,8 +9,8 @@ void gerar_relatorio_de_responsabilidade(NoABB *raiz, const char *cpf_cnpj)
 
   imprimir_relatorio_de_responsabilidade(ativas_gerenciador->head, inativas_gerenciador->head, cpf_cnpj);
 
-  liberar_lista_registro(&ativas_gerenciador);
-  liberar_lista_registro(&inativas_gerenciador);
+  liberar_lista_registro(ativas_gerenciador);
+  liberar_lista_registro(inativas_gerenciador);
 
   free(ativas_gerenciador);
   free(inativas_gerenciador);
