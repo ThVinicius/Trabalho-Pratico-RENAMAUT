@@ -2,6 +2,7 @@
 #include "../../../../libs/gov_dev/gov_dev.h"
 #include "../use-cases/inativar-maquina.use-case.h"
 #include "../use-cases/gerar-relatorio-de-responsabilidade.use-case.h"
+#include "../use-cases/exibir-maquina-por-renamaut.use-case.h"
 
 void exibir_interface(NoABB *raiz)
 {
@@ -14,7 +15,15 @@ void exibir_interface(NoABB *raiz)
   {
     menu = main_menu();
 
-    if (menu == 2)
+    if (menu == 1)
+    {
+      printf("Digite o código renamaut da máquina que deseja vizualizar: ");
+      scanf("%16s", renamaut);
+
+      exibir_maquina_por_renamaut(raiz, renamaut);
+    }
+
+    else if (menu == 2)
     {
       printf("Digite o código renamaut da máquina que será inativada: ");
       scanf("%16s", renamaut);
@@ -39,10 +48,7 @@ void exibir_interface(NoABB *raiz)
 
     else if (menu == 0)
     {
-      if (wait_confirmation("Deseja realmente sair do programa? s/n\n") == 1)
-      {
-        break;
-      }
+      break;
     }
 
   } while (1);
