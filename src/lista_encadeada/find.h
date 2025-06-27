@@ -1,3 +1,3 @@
 #include "../types/registro.type.h"
 
-Registro *find_registro(Registros *lista, char *renamaut);
+Registro *find_registro(Registro *lista, char *renamaut);

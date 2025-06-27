@@ -1,3 +1,3 @@
 #include "../types/registro.type.h"
 
-void resetar_lista(Registros **lista);
+void resetar_lista(Registro **lista);

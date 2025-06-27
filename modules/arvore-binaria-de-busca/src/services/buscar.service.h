@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../types/no.type.h"
+#include "../../../shared/types/callbacks.h"
 
-NoABB* buscar(NoABB* raiz, const char* numero_registro);
+Registro* buscar(EstruturaDados estrutura_dados, const char* numero_registro);
