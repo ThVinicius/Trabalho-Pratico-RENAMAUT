@@ -33,4 +33,17 @@ typedef struct
     ListaRegistro *tail;
 } GerenciadorListaRegistro;
 
+typedef struct NoEstadoRelatorioCategoria
+{
+    char uf[3];
+    GerenciadorListaRegistro *maquinas_no_estado;
+    struct NoEstadoRelatorioCategoria *prox;
+} NoEstadoRelatorioCategoria;
+
+typedef struct GerenciadorListaEstados
+{
+    NoEstadoRelatorioCategoria *head;
+    NoEstadoRelatorioCategoria *tail;
+} GerenciadorListaEstados;
+
 #endif
