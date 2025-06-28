@@ -1,4 +1,5 @@
 # Diretórios base dos fontes
+SRC_DIR_LISTA_ENCADEADA := modules/lista-encadeada
 SRC_DIR_BST := modules/arvore-binaria-de-busca
 SRC_DIR_AVL := modules/arvore-avl
 SRC_DIR_HASH := modules/hash 
@@ -10,6 +11,7 @@ BIN_DIR := build
 TARGET_BST := $(BIN_DIR)/index_bst # Executável para a Árvore Binária de Busca
 TARGET_AVL := $(BIN_DIR)/index_avl # Executável para a Árvore AVL
 TARGET_HASH := $(BIN_DIR)/index_hash # Novo Executável para a Tabela Hash
+TARGET_LIST := $(BIN_DIR)/index_list # Novo Executável para a Lista encadeada
 
 # Flags do compilador
 CFLAGS := -ansi -pedantic -Wall -g
@@ -30,6 +32,14 @@ SRC_FILES_AVL := $(shell find $(SRC_DIR_AVL) -name '*.c')
 SRC_FILES_HASH := $(shell find $(SRC_DIR_HASH) -name '*.c')
 
 # ======================================================================================
+
+# ======================================================================================
+# Arquivos .c específicos da Lista encadeada
+# Encontra todos os arquivos .c dentro de modules/lista-encadeada
+SRC_FILES_LIST := $(shell find $(SRC_DIR_LISTA_ENCADEADA) -name '*.c')
+
+# ======================================================================================
+
 # Arquivos .c compartilhados entre as estruturas de dados
 SHARED_SERVICES_FILES := $(shell find $(SHARED_DIR) -name '*.c')
 
@@ -58,6 +68,12 @@ $(TARGET_HASH): $(SRC_FILES_HASH) $(SHARED_SERVICES_FILES) $(SHARED_INTERFACE_US
 	gcc $(CFLAGS) $(SRC_FILES_HASH) $(SHARED_SERVICES_FILES) $(SHARED_INTERFACE_USECASE_FILES) $(LIB_OBJ_FILES) -o $(TARGET_HASH)
 	@echo "✅ Build completo para Hash: $(TARGET_HASH)"
 
+# Regra para compilar o executável da Tabela Hash
+$(TARGET_LIST): $(SRC_FILES_LIST) $(SHARED_SERVICES_FILES) $(SHARED_INTERFACE_USECASE_FILES) $(LIB_OBJ_FILES)
+	@mkdir -p $(BIN_DIR) # Garante que o diretório de build existe
+	gcc $(CFLAGS) $(SRC_FILES_LIST) $(SHARED_SERVICES_FILES) $(SHARED_INTERFACE_USECASE_FILES) $(LIB_OBJ_FILES) -o $(TARGET_LIST)
+	@echo "✅ Build completo para Lista Encadeada: $(TARGET_LIST)"
+
 # ======================================================================================
 # Regras de Limpeza
 
@@ -68,7 +84,7 @@ clean:
 # ======================================================================================
 # Regras Padrão (all)
 # O alvo 'all' construirá todos os executáveis
-all: $(TARGET_BST) $(TARGET_AVL) $(TARGET_HASH)
+all: $(TARGET_BST) $(TARGET_AVL) $(TARGET_HASH) $(TARGET_LIST)
 
 # Define alvos 'phony' que não correspondem a nomes de arquivos, garantindo que o make os execute
 .PHONY: all clean $(TARGET_BST) $(TARGET_AVL) $(TARGET_HASH)
