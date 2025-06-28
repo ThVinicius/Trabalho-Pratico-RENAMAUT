@@ -1,9 +1,9 @@
 #include <time.h>
 #include "../../shared/services/converter-arquivo.h"
-#include "../../shared/services/arvore-avl/inserir-no.service.h"
-#include "../../shared/services/arvore-avl/buscar.service.h"
-#include "../../shared/services/arvore-avl/resetar-arvore.service.h"
-#include "../../shared/types/no-avl.type.h"
+#include "services/inserir-no.service.h"
+#include "services/buscar.service.h"
+#include "services/resetar-arvore.service.h"
+#include "types/no-avl.type.h"
 #include "../../shared/interfaces/exibir-interface.h"
 #include "../../shared/types/callbacks.h"
 

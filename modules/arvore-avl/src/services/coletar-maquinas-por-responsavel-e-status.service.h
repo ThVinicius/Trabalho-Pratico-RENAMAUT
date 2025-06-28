@@ -1,5 +1,5 @@
 #include <string.h>
-#include "../../../shared/types/no-avl.type.h"
+#include "../types/no-avl.type.h"
 #include "../../../shared/types/registro.type.h"
 #include "../../../shared/services/adicionar-registro-na-lista.service.h"
 #include "../../../shared/types/callbacks.h"
