@@ -7,6 +7,7 @@
 #include "services/coletar-maquinas-por-responsavel-e-status.service.h"
 #include "services/coletar-maquinas-por-categoria-e-estado.service.h"
 #include "../../shared/interfaces/exibir-interface.h"
+#include "../../../libs/gov_dev/gov_dev.h"
 
 void *inserir_wrapper_hash(void *tabela_ptr, Registro registro)
 {
@@ -39,6 +40,8 @@ int main(int argc, char *argv[])
 
     tempo_para_insercao = (double)(fim - inicio) / CLOCKS_PER_SEC;
     printf("Tempo de CPU gasto na inserção dos dados dos arquivos (Hash com Lista Encadeada): %.6f segundos\n", tempo_para_insercao);
+
+    wait_enter("Aperte enter para inicializar o programa");
 
     exibir_interface(
         (EstruturaDados)tabela_hash,

@@ -8,6 +8,7 @@
 #include "../../shared/services/lista-encadeada/resetar-lista.service.h"
 #include "services/coletar-maquinas-por-responsavel-e-status.service.h"
 #include "services/coletar-maquinas-por-categoria-e-estado.service.h"
+#include "../../../libs/gov_dev/gov_dev.h"
 
 void *inserir_wrapper_lista_encadeada(void *lista_ptr, Registro registro)
 {
@@ -31,6 +32,8 @@ int main(int argc, char *argv[])
 
   tempo_para_insercao = (double)(fim - inicio) / CLOCKS_PER_SEC;
   printf("Tempo de CPU gasto na inserção dos dados dos arquivos (Lista Encadeada): %.6f segundos\n", tempo_para_insercao);
+
+  wait_enter("Aperte enter para inicializar o programa");
 
   exibir_interface(
       (EstruturaDados)lista_encadeada,
