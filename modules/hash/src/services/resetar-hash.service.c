@@ -1,5 +1,5 @@
 #include "resetar-hash.service.h"
-#include <stdio.h>
+#include <stdio.h> 
 
 void limparTabelaHash(TabelaHash *tabela)
 {
@@ -14,7 +14,8 @@ void limparTabelaHash(TabelaHash *tabela)
   {
     if (tabela->baldes[i] != NULL)
     {
-      limparArvoreAVL(&(tabela->baldes[i]));
+      liberar_lista_registro(tabela->baldes[i]);
+      free(tabela->baldes[i]);
     }
   }
 

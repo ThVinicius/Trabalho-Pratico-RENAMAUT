@@ -87,4 +87,4 @@ clean:
 all: $(TARGET_BST) $(TARGET_AVL) $(TARGET_HASH) $(TARGET_LIST)
 
 # Define alvos 'phony' que não correspondem a nomes de arquivos, garantindo que o make os execute
-.PHONY: all clean $(TARGET_BST) $(TARGET_AVL) $(TARGET_HASH)
+.PHONY: all clean $(TARGET_BST) $(TARGET_AVL) $(TARGET_HASH) $(TARGET_LIST)

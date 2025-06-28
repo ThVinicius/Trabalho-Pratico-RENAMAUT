@@ -1,28 +1,30 @@
 #include "coletar-maquinas-por-categoria-e-estado.service.h"
 #include <string.h>
 
-static void _coletar_maquinas_por_categoria_e_estado_avl_recursiva(NoAVL *no, const char *categoria_cod, GerenciadorListaEstados *gerenciador_estados_ref)
+void _coletar_maquinas_por_categoria_e_estado_lista(ListaRegistro *lista_head, const char *categoria_cod, GerenciadorListaEstados *gerenciador_estados_ref)
 {
-  if (no == NULL)
+  ListaRegistro *atual = lista_head;
+
+  if (atual == NULL)
   {
     return;
   }
 
-  _coletar_maquinas_por_categoria_e_estado_avl_recursiva(no->esquerda, categoria_cod, gerenciador_estados_ref);
-
-  if (no->dados.status == ATIVO && strcmp(no->dados.cat, categoria_cod) == 0)
+  while (atual != NULL)
   {
-    NoEstadoRelatorioCategoria *no_estado_atual;
-
-    no_estado_atual = adicionarEstadoOrdenadoRelatorioCategoria(gerenciador_estados_ref, no->dados.uf);
-
-    if (no_estado_atual != NULL)
+    if (atual->registro.status == ATIVO && strcmp(atual->registro.cat, categoria_cod) == 0)
     {
-      adicionar_registro_na_lista(&(no_estado_atual->maquinas_no_estado), no->dados);
-    }
-  }
+      NoEstadoRelatorioCategoria *no_estado_atual;
 
-  _coletar_maquinas_por_categoria_e_estado_avl_recursiva(no->direita, categoria_cod, gerenciador_estados_ref);
+      no_estado_atual = adicionarEstadoOrdenadoRelatorioCategoria(gerenciador_estados_ref, atual->registro.uf);
+
+      if (no_estado_atual != NULL)
+      {
+        adicionar_registro_na_lista(&(no_estado_atual->maquinas_no_estado), atual->registro);
+      }
+    }
+    atual = atual->next;
+  }
 }
 
 void coletar_maquinas_por_categoria_e_estado_hash(EstruturaDados estrutura_dados, const char *categoria_cod, GerenciadorListaEstados *gerenciador_estados_ref)
@@ -37,9 +39,9 @@ void coletar_maquinas_por_categoria_e_estado_hash(EstruturaDados estrutura_dados
 
   for (i = 0; i < TAMANHO_TABELA_HASH; i++)
   {
-    if (tabela->baldes[i] != NULL)
+    if (tabela->baldes[i] != NULL && tabela->baldes[i]->head != NULL)
     {
-      _coletar_maquinas_por_categoria_e_estado_avl_recursiva(tabela->baldes[i], categoria_cod, gerenciador_estados_ref);
+      _coletar_maquinas_por_categoria_e_estado_lista(tabela->baldes[i]->head, categoria_cod, gerenciador_estados_ref);
     }
   }
 }

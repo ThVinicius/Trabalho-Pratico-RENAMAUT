@@ -1,19 +1,30 @@
 #include "hash_table.service.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 TabelaHash *inicializarTabelaHash()
 {
-    int i;
+    int i, j;
     TabelaHash *novaTabela = (TabelaHash *)malloc(sizeof(TabelaHash));
     if (novaTabela == NULL)
     {
-        fprintf(stderr, "Erro: Falha ao alocar memória para a Tabela Hash.\n");
+
         return NULL;
     }
     for (i = 0; i < TAMANHO_TABELA_HASH; i++)
     {
-        novaTabela->baldes[i] = NULL;
+
+        novaTabela->baldes[i] = inicializarGerenciadorLista();
+        if (novaTabela->baldes[i] == NULL)
+        {
+            for (j = 0; j < i; j++)
+            {
+                liberar_lista_registro(novaTabela->baldes[j]);
+                free(novaTabela->baldes[j]);
+            }
+            free(novaTabela);
+
+            return NULL;
+        }
     }
     return novaTabela;
 }
@@ -21,17 +32,17 @@ TabelaHash *inicializarTabelaHash()
 void inserirNaTabelaHash(TabelaHash *tabela, Registro maquina)
 {
     int indice;
-    printf("inserirNaTabelaHash 1\n");
     if (tabela == NULL)
     {
-        printf("inserirNaTabelaHash 2\n");
         return;
     }
     indice = fnv1a_hash(maquina.renamaut) % TAMANHO_TABELA_HASH;
-    printf("inserirNaTabelaHash 3\n");
-    
-    tabela->baldes[indice] = (NoAVL *)inserirAVL((EstruturaDados)tabela->baldes[indice], maquina);
-    printf("inserirNaTabelaHash 4\n");
+    if (indice < 0)
+    {
+        indice += TAMANHO_TABELA_HASH;
+    }
+
+    adicionar_registro_na_lista(tabela->baldes[indice], maquina);
 }
 
 Registro *buscarNaTabelaHash(TabelaHash *tabela, const char *renamaut)
@@ -42,5 +53,10 @@ Registro *buscarNaTabelaHash(TabelaHash *tabela, const char *renamaut)
         return NULL;
     }
     indice = fnv1a_hash(renamaut) % TAMANHO_TABELA_HASH;
-    return buscarAVL((EstruturaDados)tabela->baldes[indice], renamaut);
+    if (indice < 0)
+    { /* Garante que o índice seja não-negativo */
+        indice += TAMANHO_TABELA_HASH;
+    }
+
+    return buscar_na_lista_encadeada((EstruturaDados)tabela->baldes[indice]->head, renamaut);
 }

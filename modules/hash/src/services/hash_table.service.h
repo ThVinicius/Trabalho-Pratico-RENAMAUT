@@ -1,10 +1,10 @@
 #include "../types/hash_table.type.h"
 #include "../../../shared/types/registro.type.h"
-#include "../../../shared/services/arvore-avl/inserir-no.service.h"
-#include "../../../shared/services/arvore-avl/buscar.service.h"
-#include "../../../shared/services/arvore-avl/resetar-arvore.service.h"
+#include "../../../shared/services/lista-encadeada/buscar.service.h"
+#include "../../../shared/services/adicionar-registro-na-lista.service.h"
+#include "../../../shared/services/inicializar-gerenciador-lista.service.h"
+#include "../../../shared/services/liberar-gerenciador-lista.service.h"
 #include "fnv1a_hash.service.h"
-
 
 TabelaHash *inicializarTabelaHash();
 
