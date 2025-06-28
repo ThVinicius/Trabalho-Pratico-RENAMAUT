@@ -9,6 +9,12 @@
 #include "../../shared/interfaces/exibir-interface.h"
 #include "../../../libs/gov_dev/gov_dev.h"
 
+#include "../../shared/services/persistencia/carregar-dados.service.h"
+#include "../../shared/services/persistencia/salvar-dados.service.h"
+#include "../../shared/services/inicializar-gerenciador-lista.service.h"
+#include "../../shared/services/liberar-gerenciador-lista.service.h"
+#include "services/coletar-todos-registros.service.h"
+
 void *inserir_wrapper_hash(void *tabela_ptr, Registro registro)
 {
     TabelaHash *tabela = (TabelaHash *)tabela_ptr;
@@ -27,12 +33,15 @@ int main(int argc, char *argv[])
     clock_t inicio, fim;
     double tempo_para_insercao;
     TabelaHash *tabela_hash = NULL;
+    GerenciadorListaRegistro *todos_registros_para_salvar = NULL;
 
     tabela_hash = inicializarTabelaHash();
     if (tabela_hash == NULL)
     {
         return 1;
     }
+
+    tabela_hash = (TabelaHash *)carregar_dados_do_arquivo((void *)tabela_hash, inserir_wrapper_hash, "dados.txt");
 
     inicio = clock();
     converter_arquivo((void **)&tabela_hash, argc, argv, inserir_wrapper_hash);
@@ -48,6 +57,15 @@ int main(int argc, char *argv[])
         (BuscarCallback)buscar_wrapper_hash,
         (ColetarMaquinasPorStatusEResponsavelCallback)coletar_maquinas_por_responsavel_e_status_hash,
         (ColetarMaquinasPorCategoriaEEstadoCallback)coletar_maquinas_por_categoria_e_estado_hash);
+
+    todos_registros_para_salvar = inicializarGerenciadorLista();
+    if (todos_registros_para_salvar != NULL)
+    {
+        coletar_todos_registros_hash(tabela_hash, todos_registros_para_salvar);
+        salvar_dados_no_arquivo(todos_registros_para_salvar->head, "dados.txt");
+        liberar_lista_registro(todos_registros_para_salvar);
+        free(todos_registros_para_salvar);
+    }
 
     limparTabelaHash(tabela_hash);
     return 0;
