@@ -33,7 +33,12 @@ int main(int argc, char *argv[])
   ListaRegistro *lista_encadeada = NULL;
   GerenciadorListaRegistro *todos_registros_para_salvar = NULL;
 
+  inicio = clock();
   lista_encadeada = (ListaRegistro *)carregar_dados_do_arquivo((void *)lista_encadeada, inserir_wrapper_lista_encadeada, "dados.txt");
+  fim = clock();
+
+  tempo_para_insercao = (double)(fim - inicio) / CLOCKS_PER_SEC;
+  printf("Tempo de CPU gasto ao carregar os registros salvos (Lista Encadeada): %.6f segundos\n", tempo_para_insercao);
 
   inicio = clock();
   converter_arquivo((void **)&lista_encadeada, argc, argv, inserir_wrapper_lista_encadeada);

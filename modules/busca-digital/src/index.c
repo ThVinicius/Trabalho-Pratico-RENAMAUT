@@ -34,7 +34,12 @@ int main(int argc, char *argv[])
   NoTrie *arvore_trie = NULL;
   GerenciadorListaRegistro *todos_registros_para_salvar = NULL;
 
+  inicio = clock();
   arvore_trie = (NoTrie *)carregar_dados_do_arquivo((void *)arvore_trie, inserir_wrapper_trie, "dados.txt");
+  fim = clock();
+
+  tempo_para_insercao = (double)(fim - inicio) / CLOCKS_PER_SEC;
+  printf("Tempo de CPU gasto ao carregar os registros salvos (Árvore de Busca Digital - Trie): %.6f segundos\n", tempo_para_insercao);
 
   inicio = clock();
   converter_arquivo((void **)&arvore_trie, argc, argv, inserir_wrapper_trie);

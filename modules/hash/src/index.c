@@ -41,7 +41,12 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    inicio = clock();
     tabela_hash = (TabelaHash *)carregar_dados_do_arquivo((void *)tabela_hash, inserir_wrapper_hash, "dados.txt");
+    fim = clock();
+
+    tempo_para_insercao = (double)(fim - inicio) / CLOCKS_PER_SEC;
+    printf("Tempo de CPU gasto ao carregar os registros salvos (Hash com Lista Encadeada): %.6f segundos\n", tempo_para_insercao);
 
     inicio = clock();
     converter_arquivo((void **)&tabela_hash, argc, argv, inserir_wrapper_hash);

@@ -29,7 +29,12 @@ int main(int argc, char *argv[])
   NoABB *arvore = NULL;
   GerenciadorListaRegistro *todos_registros_para_salvar = NULL;
 
+  inicio = clock();
   arvore = (NoABB *)carregar_dados_do_arquivo((void *)arvore, inserir_wrapper, "dados.txt");
+  fim = clock();
+
+  tempo_para_insercao = (double)(fim - inicio) / CLOCKS_PER_SEC;
+  printf("Tempo de CPU gasto ao carregar os registros salvos (Arvore Binaria): %.6f segundos\n", tempo_para_insercao);
 
   inicio = clock();
   converter_arquivo((void **)&arvore, argc, argv, inserir_wrapper);
