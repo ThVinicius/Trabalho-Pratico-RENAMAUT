@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
-#include "../types/no.type.h"
+#include "../../types/no-avl.type.h"
 #include "criar-no.service.h"
-#include "../../../shared/types/callbacks.h"
+#include "../../types/callbacks.h"
 
 int altura(NoAVL *N);
 int max(int a, int b);

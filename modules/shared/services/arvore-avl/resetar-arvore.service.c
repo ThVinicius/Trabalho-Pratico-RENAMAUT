@@ -1,4 +1,4 @@
-#include "./resetar-arvore.service.h"
+#include "resetar-arvore.service.h"
 
 void limparArvoreAVL(NoAVL **raiz)
 {

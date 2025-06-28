@@ -1,7 +1,7 @@
 #ifndef NO_AVL_TYPE_H
 #define NO_AVL_TYPE_H
 
-#include "../../../shared/types/registro.type.h"
+#include "registro.type.h"
 
 typedef struct NoAVL
 {

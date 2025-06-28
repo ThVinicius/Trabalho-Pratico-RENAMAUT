@@ -7,6 +7,6 @@
 
 
 /*Funções para ler o JSON e liberar memória*/
-void *parse_json_and_insert(char *filename, void *estrutura_dados, InserirCallback callback_inserir);
+void *parse_json_and_insert(char *filename, void **estrutura_dados, InserirCallback callback_inserir);
 
 #endif

@@ -1,4 +1,4 @@
-#include "./criar-no.service.h"
+#include "criar-no.service.h"
 
 NoAVL *criarNoAVL(Registro maquina)
 {

@@ -1,4 +1,4 @@
-#include "./buscar.service.h"
+#include "buscar.service.h"
 
 Registro *buscarAVL(EstruturaDados estrutura_dados, const char *numero_registro)
 {
