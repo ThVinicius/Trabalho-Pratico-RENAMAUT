@@ -16,7 +16,7 @@ void imprimirRelatorioCategoria(GerenciadorListaEstados *gerenciador_estados, co
   {
     while (atual_estado != NULL)
     {
-      printf("\n*** Estado: %s ***\n", atual_estado->uf);
+      printf("\n*** Estado: %s (%s)***\n", get_state_name_by_abbr(atual_estado->uf), atual_estado->uf);
       imprimir_lista_registro(atual_estado->maquinas_no_estado.head);
       atual_estado = atual_estado->prox;
     }
